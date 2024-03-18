@@ -50,5 +50,14 @@ namespace Watch_Store_Management_Web_API.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update(int id, ProductRequestDTO productRequest)
+        {
+            var result = await this.productService.Update(id, productRequest);
+            if (result is not null) return Ok(result);
+            return NotFound(new { message = $"Entity with ID => {id} Not Found" });
+        }
+
     }
 }

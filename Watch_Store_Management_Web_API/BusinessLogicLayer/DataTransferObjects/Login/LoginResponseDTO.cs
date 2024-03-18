@@ -2,10 +2,10 @@
 {
     public class LoginResponseDTO
     {
-        public string UserName { get; set; }
+        public string UserName { get; set; } = null!;
         public int UserId { get; set; }
-        public string RoleName { get; set; }
+        public string RoleName { get; set; } = null!;
 
-        public string LoginToken { get; set; }
+        public string LoginToken { get; set; } = null!;
     }
 }

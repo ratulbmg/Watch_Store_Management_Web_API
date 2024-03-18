@@ -23,6 +23,9 @@ namespace Watch_Store_Management_Web_API.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await this.brandService.GetAll();
+
+            //ModelState.AddModelError("Error", "The input is invalid");
+            //return BadRequest(ModelState);
             return Ok(result);
         }
 

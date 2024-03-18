@@ -20,16 +20,16 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Middlewares
         {
             try
             {
-                await _next(httpContext);
+                await _next(httpContext); //This can call either next middleware in the pipeline or the controller
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
                 // Log the Exception
-                logger.LogInformation($"Exception Occurred => {e}");
+                logger.LogInformation($"Exception Occurred => {exception}");
                 httpContext.Response.StatusCode = 500;
                 await httpContext.Response.WriteAsJsonAsync(new
                 {
-                    Error = e.Message,
+                    Error = exception.Message,
                     Status = 500,
                     Success = false
                 });

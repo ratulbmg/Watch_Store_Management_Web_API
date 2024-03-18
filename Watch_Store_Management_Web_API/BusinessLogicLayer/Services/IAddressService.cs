@@ -8,6 +8,7 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
 {
     public interface IAddressService : IBaseService<AddressRequestDTO, AddressResponseDTO>
     {
+        Task<IEnumerable<AddressResponseDTO>> GetAddressByUserId(int id);
     }
 
     public class AddressService : IAddressService
@@ -30,9 +31,18 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
             return result;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var result = await this.repositoryWrapper.AddressRepository.DeleteAsync(id);
+            await this.repositoryWrapper.SaveAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<AddressResponseDTO>> GetAddressByUserId(int id)
+        {
+            var addresses = await this.repositoryWrapper.AddressRepository.GetByCondition(x => x.UserId == id);
+            var result = mapper.Map<IEnumerable<AddressResponseDTO>>(addresses);
+            return result;
         }
 
         public async Task<IEnumerable<AddressResponseDTO>> GetAll()
@@ -47,9 +57,17 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<AddressResponseDTO?> Update(int id, AddressRequestDTO requestDTO)
+        public async Task<AddressResponseDTO?> Update(int id, AddressRequestDTO requestDTO)
         {
-            throw new NotImplementedException();
+            var address = mapper.Map<Address>(requestDTO);
+            address.Id = id;
+            var addressResponse = await this.repositoryWrapper.AddressRepository.UpdateAsync(id, address);
+            if (addressResponse is not null)
+            {
+                await this.repositoryWrapper.SaveAsync();
+                return mapper.Map<AddressResponseDTO>(addressResponse);
+            }
+            return null;
         }
     }
 }

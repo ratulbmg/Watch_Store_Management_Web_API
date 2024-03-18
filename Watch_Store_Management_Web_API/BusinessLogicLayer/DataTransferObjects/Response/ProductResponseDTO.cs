@@ -5,6 +5,7 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.DataTransferObjects.
 {
     public class ProductResponseDTO
     {
+        public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
         public double Price { get; set; }
         public string Description { get; set; } = null!;
@@ -13,8 +14,8 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.DataTransferObjects.
         public int CategoryId { get; set; }
 
         [JsonPropertyName("Category_Name")]
-        public string CategoryName { get; set; }
+        public string CategoryName { get; set; } = null!;
         public int BrandId { get; set; }
-        public string BrandName { get; set; }
+        public string BrandName { get; set; } = null!;
     }
 }

@@ -27,7 +27,7 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
         public async Task<UserResponseDTO> Add(UserRequestDTO requestDTO)
         {
             var user = mapper.Map<User>(requestDTO);
-            user.PasswordHash = new PasswordHasher<object?>().HashPassword(null, user.PasswordHash);
+            //user.PasswordHash = new PasswordHasher<object?>().HashPassword(null, user.PasswordHash);
             var userResponse = await this.repositoryWrapper.UserRepository.CreateAsync(user);
             await this.repositoryWrapper.SaveAsync();
             var result = mapper.Map<UserResponseDTO>(userResponse);
@@ -39,11 +39,13 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
             var result = await this.repositoryWrapper.UserRepository.DeleteAsync(id);
             await this.repositoryWrapper.SaveAsync();
             return result;
+            // del will not work when any address is created so firstly we need to delete address data and all FR KEY data
+            // Code need to be improved
         }
 
         public async Task<IEnumerable<UserResponseDTO>> GetAll()
         {
-            var users = await this.repositoryWrapper.UserRepository.GetAllAsync();
+            var users = await this.repositoryWrapper.UserRepository.GetAllAsync("Role");
             var result = mapper.Map<IEnumerable<UserResponseDTO>>(users);
             return result;
         }

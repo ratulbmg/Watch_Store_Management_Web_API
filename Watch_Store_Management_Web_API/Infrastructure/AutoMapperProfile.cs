@@ -26,6 +26,9 @@ namespace Watch_Store_Management_Web_API.Infrastructure
 
             CreateMap<UserRequestDTO, User>();
             CreateMap<User, UserResponseDTO>();
+
+            CreateMap<Order, OrderResponseDTO>();
+            CreateMap<OrderDetail, OrderDetailResponseDTO>();
         }
     }
 }

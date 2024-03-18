@@ -13,11 +13,9 @@ namespace Watch_Store_Management_Web_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
-        private readonly IConfiguration configuration;
-        public AuthController(IAuthService authService, IConfiguration configuration)
+        public AuthController(IAuthService authService)
         {
             this.authService = authService;
-            this.configuration = configuration;
         }
 
         [HttpPost("login")]
@@ -31,19 +29,5 @@ namespace Watch_Store_Management_Web_API.Controllers
             }
             return Unauthorized(new { message = "Invalid Login!" });
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var roleName = User.Claims.Where(x => x.Type == ClaimTypes.Role).FirstOrDefault();
-        //    return Ok($"You are having {roleName.Value} Role");
-        //}
-
-        //[HttpGet("admin")]
-        //[Authorize(Roles = "Admin")]
-        //public async Task<IActionResult> GetForAdmin()
-        //{
-        //    return Ok("You are an ADMIN!");
-        //}
     }
 }

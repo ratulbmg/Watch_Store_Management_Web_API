@@ -26,6 +26,11 @@ builder.JWTServiceConfig();
 builder.AutoMapperConfig();
 builder.RegisterDBContextConfig();
 
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
+{
+    build.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,13 +40,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("corspolicy");
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseExceptionHandlarMiddleware();  // Global Exception Handeling
+// Global Exception Handeling
+app.UseExceptionHandlarMiddleware();
 
 app.MapControllers();
 

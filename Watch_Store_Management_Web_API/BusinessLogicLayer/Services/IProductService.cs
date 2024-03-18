@@ -49,9 +49,17 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.Services
             return result;
         }
 
-        public Task<ProductResponseDTO?> Update(int id, ProductRequestDTO requestDTO)
+        public async Task<ProductResponseDTO?> Update(int id, ProductRequestDTO requestDTO)
         {
-            throw new NotImplementedException();
+            var product = mapper.Map<Product>(requestDTO);
+            product.Id = id;
+            var productResponse = await this.repositoryWrapper.ProductRepository.UpdateAsync(id, product);
+            if (productResponse is not null)
+            {
+                await this.repositoryWrapper.SaveAsync();
+                return mapper.Map<ProductResponseDTO>(productResponse);
+            }
+            return null;
         }
     }
 }

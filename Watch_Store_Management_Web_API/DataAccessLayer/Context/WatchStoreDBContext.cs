@@ -116,9 +116,7 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Context
             {
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-                entity.Property(e => e.Status)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+        
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Orders)
@@ -155,7 +153,7 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImagePath)
-                    .HasMaxLength(50)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)

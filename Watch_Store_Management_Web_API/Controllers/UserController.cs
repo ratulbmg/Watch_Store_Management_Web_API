@@ -26,6 +26,7 @@ namespace Watch_Store_Management_Web_API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await this.userService.GetById(id);
@@ -37,11 +38,13 @@ namespace Watch_Store_Management_Web_API.Controllers
         public async Task<IActionResult> Post(UserRequestDTO userRequest)
         {
             var result = await this.userService.Add(userRequest);
+            if (result is null) return BadRequest(new { message = "User already exiest in database"});
             return Ok(result);
         }
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Update(int id, [FromBody] UserRequestDTO userRequest)
         {
             var result = await this.userService.Update(id, userRequest);
@@ -51,6 +54,7 @@ namespace Watch_Store_Management_Web_API.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await this.userService.Delete(id);

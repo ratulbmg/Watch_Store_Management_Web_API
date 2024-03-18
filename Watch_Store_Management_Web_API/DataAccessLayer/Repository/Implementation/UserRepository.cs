@@ -17,14 +17,19 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Repository.Implementati
 
         public async Task<User?> ValidateUser(string userName, string password)
         {
+            //var user = await watchStoreDBContext.Users
+            //    .Include(x => x.Role)
+            //    .FirstOrDefaultAsync(x => x.UserName == userName);
+            //if (user is not null)
+            //{
+            //    var res = new PasswordHasher<object?>().VerifyHashedPassword(null, user.PasswordHash, password);
+            //    if (res.Equals(PasswordVerificationResult.Success)) return user;
+            //}
+            //return null;
             var user = await watchStoreDBContext.Users
                 .Include(x => x.Role)
-                .FirstOrDefaultAsync(x => x.UserName == userName);
-            if (user is not null)
-            {
-                var res = new PasswordHasher<object?>().VerifyHashedPassword(null, user.PasswordHash, password);
-                if (res.Equals(PasswordVerificationResult.Success)) return user;
-            }
+                .FirstOrDefaultAsync(x => x.UserName == userName && x.PasswordHash == password);
+            if (user is not null) return user;
             return null;
         }
     }

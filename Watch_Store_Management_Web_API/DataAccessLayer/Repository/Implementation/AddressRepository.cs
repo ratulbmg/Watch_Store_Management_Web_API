@@ -6,8 +6,7 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Repository.Implementati
 {
     public class AddressRepository : BaseRepository<Address>, IAddressRepository
     {
-        public AddressRepository(WatchStoreDBContext watchStoreDBContext) : base(watchStoreDBContext)
-        {
-        }
+        public AddressRepository(WatchStoreDBContext watchStoreDBContext) : base(watchStoreDBContext) { }
+
     }
 }

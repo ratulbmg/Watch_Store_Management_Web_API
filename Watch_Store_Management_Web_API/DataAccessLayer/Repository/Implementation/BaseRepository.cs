@@ -22,7 +22,7 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Repository.Implementati
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await dbset.FindAsync(id);
-            if (entity == null) return await Task.FromResult(false);
+            if (entity is null) return await Task.FromResult(false);
             dbset.Remove(entity);
             return await Task.FromResult(true);
         }
@@ -49,8 +49,8 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Repository.Implementati
 
         public async Task<T?> GetById(int id)
         {
-            var result = dbset.FindAsync(id);
-            return await result;
+            var result = await dbset.FindAsync(id);
+            return result;
         }
         public async Task<T?> UpdateAsync(int id, T entity)
         {

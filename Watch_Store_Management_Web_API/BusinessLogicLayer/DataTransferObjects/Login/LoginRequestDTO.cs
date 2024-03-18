@@ -6,10 +6,10 @@ namespace Watch_Store_Management_Web_API.BusinessLogicLayer.DataTransferObjects.
     {
         [StringLength(50)]
         [Required]
-        public string Username { get; set; }
+        public string Username { get; set; } = null!;
 
         [StringLength(100)]
         [Required]
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
     }
 }

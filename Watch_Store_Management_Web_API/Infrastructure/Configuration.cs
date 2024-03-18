@@ -23,6 +23,8 @@ namespace Watch_Store_Management_Web_API.Infrastructure
             Service.AddScoped<IRoleService, RoleService>();
             Service.AddScoped<IUserService, UserService>();
             Service.AddScoped<IAuthService, AuthService>();
+            Service.AddScoped<IOrderService, OrderService>();
+            
             return Service;
         }
 

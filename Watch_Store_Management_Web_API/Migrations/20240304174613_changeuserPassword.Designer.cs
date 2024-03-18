@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Watch_Store_Management_Web_API.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using Watch_Store_Management_Web_API.DataAccessLayer.Context;
 namespace Watch_Store_Management_Web_API.Migrations
 {
     [DbContext(typeof(WatchStoreDBContext))]
-    partial class WatchStoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240304174613_changeuserPassword")]
+    partial class changeuserPassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,6 +392,7 @@ namespace Watch_Store_Management_Web_API.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasMaxLength(512)
                         .IsUnicode(false)
                         .HasColumnType("varchar(512)");

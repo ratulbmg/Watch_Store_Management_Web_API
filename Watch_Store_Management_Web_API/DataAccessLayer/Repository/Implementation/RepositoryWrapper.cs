@@ -5,7 +5,7 @@ namespace Watch_Store_Management_Web_API.DataAccessLayer.Repository.Implementati
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        public readonly WatchStoreDBContext watchStoreDBContext;
+        private readonly WatchStoreDBContext watchStoreDBContext;
         public ICategoryRepository CategoryRepository { get; set; }
         public IRoleRepository RoleRepository { get; set; }
         public IBrandRepository BrandRepository { get; set; }
